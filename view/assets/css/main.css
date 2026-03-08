@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+body {
+    background: url(../images/bg.png);
+    font-family: 'Inter', sans-serif; 
+}
+.sidebar-item-active {
+    background-color: white;
+    border-radius: 20px;
+    color: #1e293b; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+.lucide {
+    width: 20px; 
+    height: 20px; 
+}
