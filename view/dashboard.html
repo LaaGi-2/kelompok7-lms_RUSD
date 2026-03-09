@@ -153,17 +153,14 @@
                     </footer>
  </main>
 <script>
-        // Inisialisasi Lucide Icons
         lucide.createIcons();
 
         const ctx = document.getElementById('financialChart').getContext('2d');
         
-        // Membuat gradien untuk garis biru
         const blueGradient = ctx.createLinearGradient(0, 0, 0, 400);
         blueGradient.addColorStop(0, 'rgba(59, 130, 246, 0.4)');
         blueGradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
 
-        // Membuat gradien untuk garis merah
         const redGradient = ctx.createLinearGradient(0, 0, 0, 400);
         redGradient.addColorStop(0, 'rgba(239, 68, 68, 0.2)');
         redGradient.addColorStop(1, 'rgba(239, 68, 68, 0)');

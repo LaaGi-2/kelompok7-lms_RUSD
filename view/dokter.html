@@ -351,12 +351,10 @@
             const backBtn = document.getElementById('back-button');
             const searchContainer = document.getElementById('search-container');
 
-            // Header Animation
             backBtn.classList.remove('w-0', 'opacity-0', 'mr-0', 'pointer-events-none');
             backBtn.classList.add('w-12', 'opacity-100', 'mr-4', 'p-3');
             searchContainer.classList.replace('w-[400px]', 'w-[340px]');
 
-            // Update Detail Data
             document.getElementById('det-name').innerText = name;
             document.getElementById('card-name').innerText = name;
             document.getElementById('det-nip').innerText = "NIP: " + nip;
@@ -364,10 +362,8 @@
             document.getElementById('det-spec').innerText = spec;
             document.getElementById('det-img').src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=0f172a&color=fff&bold=true`;
             
-            // Link email dinamis sederhana
             document.getElementById('det-email').innerText = name.toLowerCase().split(' ')[1] + "@rsud-bp.com";
 
-            // View Toggle
             listView.classList.add('hidden');
             detailView.classList.remove('hidden');
             

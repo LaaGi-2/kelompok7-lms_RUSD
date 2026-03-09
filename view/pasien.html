@@ -266,7 +266,6 @@
     </div>
  </main>
 <script>
-        // Inisialisasi Lucide Icons
 lucide.createIcons();
 
 function showPatientDetail(name, id) {
@@ -280,17 +279,14 @@ function showPatientDetail(name, id) {
     backBtn.classList.add('w-12', 'opacity-100', 'mr-4', 'p-3');
     headerLeft.classList.replace('gap-0', 'gap-0');
 
-    // Update data di dalam detail view secara dinamis
     document.getElementById('det-name').innerText = name;
     document.getElementById('card-name').innerText = name;
     document.getElementById('det-id').innerText = "Pasien : " + id;
     document.getElementById('det-img').src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=0f172a&color=fff`;
 
-    // Toggle tampilan dengan animasi CSS
     listView.classList.add('hidden');
     detailView.classList.remove('hidden');
     
-    // Scroll area konten kembali ke atas
     document.getElementById('main-content-area').scrollTop = 0;
 }
 

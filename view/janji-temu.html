@@ -218,19 +218,16 @@
     </main>
  </main>
 <script>
-        // Inisialisasi Lucide Icons
         lucide.createIcons();
 
         function showDetail(title, type, desc, date) {
         const panel = document.getElementById('event-detail-panel');
         const tag = document.getElementById('event-tag');
         
-        // Update Konten
         document.getElementById('event-title').innerText = title;
         document.getElementById('event-desc').innerText = desc;
         document.getElementById('event-date').innerText = date + " 2026";
         
-        // Update Warna Tag
         if(type === 'Rose') {
             tag.className = 'px-3 py-1 bg-rose-100 text-rose-600 rounded-lg text-[10px] font-black uppercase';
             tag.innerText = 'Urgent';
@@ -242,7 +239,6 @@
             tag.innerText = 'Routine';
         }
 
-        // Tampilkan Panel (menggeser dari kanan ke dalam)
         panel.classList.remove('translate-x-full');
     }
 
