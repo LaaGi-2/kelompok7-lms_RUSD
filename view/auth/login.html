@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RSUD Bakti Permana</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        .login-card {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 h-screen flex items-center justify-center p-6">
+
+    <div class="login-card bg-white w-full max-w-[1100px] h-[700px] rounded-[50px] shadow-2xl shadow-blue-900/5 flex overflow-hidden border border-slate-100">
+        
+        <div class="w-full lg:w-1/2 p-12 md:p-20 flex flex-col justify-center">
+            <div class="mb-10">
+                <h1 class="text-3xl font-black text-slate-800 tracking-tight">Selamat Datang</h1>
+                <p class="text-slate-400 mt-2 font-medium">Silakan masuk ke akun administrator Anda</p>
+            </div>
+
+            <form action="../dashboard.html" class="flex flex-col gap-5">
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="email" placeholder="admin@rsud-bp.com" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-700">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between items-center px-1">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Password</label>
+                        <a href="#" class="text-[10px] font-bold text-blue-600 hover:underline">Lupa Password?</a>
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="password" placeholder="••••••••" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-700">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 px-1 mt-1">
+                    <input type="checkbox" id="remember" class="w-4 h-4 rounded border-slate-300 text-blue-900 focus:ring-blue-900">
+                    <label for="remember" class="text-xs font-bold text-slate-400 cursor-pointer">Tetap masuk selama 30 hari</label>
+                </div>
+
+                <button type="submit" class="mt-4 w-full py-5 bg-blue-900 text-white rounded-[20px] font-bold shadow-lg shadow-blue-900/20 hover:bg-slate-800 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                    MASUK KE DASHBOARD
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </form>
+
+            <div class="md:col-span-2 mt-2">
+                    <p class="text-center mt-6 text-xs font-medium text-slate-400">
+                        Belum punya akun? 
+                        <a href="register.html" class="text-blue-600 font-bold hover:underline">Daftar Sekarang</a>
+                    </p>
+                </div>
+        </div>
+
+        <div class="hidden lg:block w-1/2 bg-blue-900 relative p-16">
+            <div class="absolute top-20 right-20 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-40 left-10 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl"></div>
+            
+            <div class="relative h-full flex flex-col justify-between z-10">
+                <img src="../assets/images/logo-white.png" alt="logo" class="w-48" >
+
+                <div>
+                    <h2 class="text-5xl font-black text-white">
+                        Digitalisasi<br>Layanan<br>Kesehatan.
+                    </h2>
+                    <p class="text-blue-200 mt-6 max-w-sm leading-relaxed font-medium">
+                        Solusi manajemen rumah sakit terpadu untuk memberikan pelayanan terbaik bagi masyarakat.
+                    </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-[30px] border border-white/10 flex items-center gap-4">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-blue-900"></div>
+                        <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-blue-900"></div>
+                        <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-blue-900"></div>
+                    </div>
+                    <span class="text-xs font-bold text-white tracking-wide uppercase">Dikelola oleh +24 Staf Admin</span>
+                </div>
+            </div>
+
+            <img src="../assets/images/pattern.png" 
+                class="absolute inset-0 w-full h-full object-cover mix-blend-overlay">
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

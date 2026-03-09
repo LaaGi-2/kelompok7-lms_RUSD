@@ -19,7 +19,7 @@
         </div>
 
         <nav class="flex flex-col gap-1">
-            <a href="index.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
+            <a href="dashboard.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
                 <i data-lucide="layout-dashboard"></i> Dashboard
             </a>
             <a href="janji-temu.html" class="sidebar-item-active p-4 flex items-center gap-4 font-semibold">
@@ -57,98 +57,161 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-1 gap-8 h-full">
-            <div class="flex flex-col gap-6">
-                
-                <div class="flex items-center gap-6 mb-2">
-                    <h2 class="text-3xl font-black text-slate-800">July 2026</h2>
-                    <div class="flex bg-slate-100 rounded-xl p-1">
-                        <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg transition group">
-                            <i data-lucide="chevron-left" class="w-5 h-5 text-slate-400 group-hover:text-slate-800"></i>
-                        </button>
-                        <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg transition group">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:text-slate-800"></i>
-                        </button>
-                    </div>
+        <div class="grid grid-cols-1 gap-8 h-full relative">
+    <div class="flex flex-col gap-6">
+        
+        <div class="flex items-center gap-6 mb-2">
+            <h2 class="text-3xl font-black text-slate-800">July 2026</h2>
+            <div class="flex bg-slate-100 rounded-xl p-1">
+                <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg transition group">
+                    <i data-lucide="chevron-left" class="w-5 h-5 text-slate-400 group-hover:text-slate-800"></i>
+                </button>
+                <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg transition group">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:text-slate-800"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="border border-slate-100 rounded-[35px] overflow-hidden bg-white shadow-sm flex-1 flex flex-col relative">
+            
+            <div id="event-detail-panel" class="absolute right-0 top-0 h-full w-80 bg-white/95 backdrop-blur-md border-l border-slate-100 z-20 translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="font-black text-slate-800 uppercase text-xs tracking-widest">Detail Kegiatan</h3>
+                    <button onclick="closeDetail()" class="text-slate-400 hover:text-slate-800 transition">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
                 </div>
-
-                <div class="border border-slate-100 rounded-[35px] overflow-hidden bg-white shadow-sm flex-1 flex flex-col">
-                    <div class="grid grid-cols-7 border-b border-slate-50">
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">SUN</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">MON</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">TUE</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">WED</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">THU</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">FRI</div>
-                        <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest">SAT</div>
+                
+                <div id="detail-content" class="flex flex-col gap-6">
+                    <div>
+                        <span id="event-tag" class="px-3 py-1 bg-rose-100 text-rose-600 rounded-lg text-[10px] font-black uppercase">Meeting</span>
+                        <h4 id="event-title" class="text-xl font-black text-slate-800 mt-3 leading-tight">Judul Kegiatan</h4>
+                        <p id="event-date" class="text-xs font-bold text-slate-400 mt-1">Kamis, 19 Februari</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <p class="text-[11px] font-black text-slate-400 uppercase tracking-tighter">Deskripsi</p>
+                        <p id="event-desc" class="text-xs text-slate-600 leading-relaxed">
+                            Pemeriksaan rutin terhadap data pasien rawat inap dan laporan stok obat harian untuk departemen bedah.
+                        </p>
                     </div>
 
-                    <div class="grid grid-cols-7 flex-1 overflow-y-auto">
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">1</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            2 <div class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate">Meeting RSUD</div>
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">3</div>
-                        <div class="border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            4 <div class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate">Lab Test A</div>
-                        </div>
-
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">5</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            6 <div class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate">Internal Audit</div>
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            7 <div class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate">Surgery B</div>
-                            <div class="mt-1 p-1 bg-orange-100 text-orange-600 rounded-md truncate">Follow-up</div>
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">8</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">9</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">10</div>
-                        <div class="border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            11 <div class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate">Vaccine C</div>
-                        </div>
-
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">12</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">13</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            14
-                            <div class="mt-2 p-1 bg-orange-100 text-orange-600 rounded-md truncate">Daily Report</div>
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">15</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            16 <div class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate">St. Peter's Day</div>
-                            <div class="mt-1 p-1 bg-rose-100 text-rose-600 rounded-md truncate">Clinic Shift</div>
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">17</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">18</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800"><span class="font-bold bg-slate-800 text-white w-6 h-6 rounded-full flex items-center justify-center">19</span>
-                            <div class="mt-2 p-1 bg-orange-100 text-orange-600 rounded-md truncate">Checkup Dr. Abdi</div>
-                        </div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">20</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">21</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">22</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">23</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">24</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">25</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">26</div>
-                        <div class="border-r border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">27</div>
-                         <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">28</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">29
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">30</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
-                            31
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">1</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">
-                            2
-                        </div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">3</div>
-                        <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">4</div>
+                    <div class="mt-auto pt-6 border-t border-slate-100">
+                        <button class="w-full py-3 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest">Edit Jadwal</button>
                     </div>
                 </div>
             </div>
+
+            <div class="grid grid-cols-7 border-b border-slate-50 bg-slate-50/50">
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Sun</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Mon</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Tue</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Wed</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Thu</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Fri</div>
+                <div class="py-4 text-center text-[11px] font-bold text-slate-400 tracking-widest uppercase">Sat</div>
+            </div>
+
+            <div class="grid grid-cols-7 flex-1 overflow-y-auto relative">
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">1</div>
+                
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    2 
+                    <div onclick="event.stopPropagation(); showDetail('Meeting RSUD', 'Rose', 'Rapat koordinasi mingguan seluruh kepala departemen mengenai efisiensi operasional.', '02 Juli')" 
+                        class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Meeting RSUD
+                    </div>
+                </div>
+                
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">3</div>
+                
+                <div class="border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    4 
+                    <div onclick="event.stopPropagation(); showDetail('Lab Test A', 'Blue', 'Pengujian sampel darah untuk pasien rujukan rawat jalan poli dalam.', '04 Juli')" 
+                        class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Lab Test A
+                    </div>
+                </div>
+
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">5</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    6 
+                    <div onclick="event.stopPropagation(); showDetail('Internal Audit', 'Rose', 'Audit berkas administrasi dan kepatuhan prosedur medis.', '06 Juli')" 
+                        class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Internal Audit
+                    </div>
+                </div>
+                
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    7 
+                    <div onclick="event.stopPropagation(); showDetail('Surgery B', 'Rose', 'Operasi bedah elektif untuk pasien Tn. S di Ruang Operasi 02.', '07 Juli')" 
+                        class="mt-2 p-1 bg-rose-100 text-rose-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Surgery B
+                    </div>
+                    <div onclick="event.stopPropagation(); showDetail('Follow-up Pasca Operasi', 'Orange', 'Pengecekan kondisi pasien setelah tindakan bedah kemarin malam.', '07 Juli')" 
+                        class="mt-1 p-1 bg-orange-100 text-orange-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Follow-up
+                    </div>
+                </div>
+
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">8</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">9</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">10</div>
+                <div class="border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    11 
+                    <div onclick="event.stopPropagation(); showDetail('Vaccine C', 'Blue', 'Vaksinasi booster untuk tenaga kesehatan tahap 2.', '11 Juli')" 
+                        class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Vaccine C
+                    </div>
+                </div>
+
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">12</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">13</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    14 
+                    <div onclick="event.stopPropagation(); showDetail('Daily Report', 'Orange', 'Laporan BOR dan utilisasi alat kesehatan.', '14 Juli')" 
+                        class="mt-2 p-1 bg-orange-100 text-orange-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Daily Report
+                    </div>
+                </div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">15</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    16 
+                    <div onclick="event.stopPropagation(); showDetail('St. Peters Day', 'Blue', 'Peringatan hari jadi RSUD dan baksos.', '16 Juli')" 
+                        class="mt-2 p-1 bg-blue-100 text-blue-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        St. Peter's Day
+                    </div>
+                </div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">17</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">18</div>
+
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">
+                    <span class="font-bold bg-slate-800 text-white w-6 h-6 rounded-full flex items-center justify-center">19</span>
+                    <div onclick="event.stopPropagation(); showDetail('Checkup Dr. Abdi', 'Orange', 'Kontrol rutin pasien poli spesialis.', '19 Juli')" 
+                        class="mt-2 p-1 bg-orange-100 text-orange-600 rounded-md truncate text-[10px] cursor-pointer hover:brightness-95 transition">
+                        Checkup Dr. Abdi
+                    </div>
+                </div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">20</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">21</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">22</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">23</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">24</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">25</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">26</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">27</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">28</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">29</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">30</div>    
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-800">31</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">1</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">2</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">3</div>
+                <div class="border-r border-b border-slate-50 p-2 min-h-[120px] text-[11px] font-bold text-slate-300">4</div>
+            </div>
         </div>
+    </div>
+</div>
         <footer class="mt-8 text-center text-[10px] font-bold text-slate-300 tracking-tighter">
             ©Copyright by Kelompok 7. All rights reserved.
         </footer>
@@ -158,7 +221,34 @@
         // Inisialisasi Lucide Icons
         lucide.createIcons();
 
+        function showDetail(title, type, desc, date) {
+        const panel = document.getElementById('event-detail-panel');
+        const tag = document.getElementById('event-tag');
         
+        // Update Konten
+        document.getElementById('event-title').innerText = title;
+        document.getElementById('event-desc').innerText = desc;
+        document.getElementById('event-date').innerText = date + " 2026";
+        
+        // Update Warna Tag
+        if(type === 'Rose') {
+            tag.className = 'px-3 py-1 bg-rose-100 text-rose-600 rounded-lg text-[10px] font-black uppercase';
+            tag.innerText = 'Urgent';
+        } else if(type === 'Blue') {
+            tag.className = 'px-3 py-1 bg-blue-100 text-blue-600 rounded-lg text-[10px] font-black uppercase';
+            tag.innerText = 'Medical';
+        } else {
+            tag.className = 'px-3 py-1 bg-orange-100 text-orange-600 rounded-lg text-[10px] font-black uppercase';
+            tag.innerText = 'Routine';
+        }
+
+        // Tampilkan Panel (menggeser dari kanan ke dalam)
+        panel.classList.remove('translate-x-full');
+    }
+
+    function closeDetail() {
+        document.getElementById('event-detail-panel').classList.add('translate-x-full');
+    }
     </script>
 </body>
 </html>

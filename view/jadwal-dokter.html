@@ -3,23 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSUD Bakti Permana - Dashboard</title>
+    <title>RSUD Bakti Permana - Jadwal Dokter</title>
     <link rel="stylesheet" href="assets/css/main.css">
      <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .day-card-active { background: #1e3a8a; color: white; transform: translateY(-5px); box-shadow: 0 10px 20px -5px rgba(30, 58, 138, 0.3); }
+        #date-slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Kunci utama scroll */
+        -webkit-overflow-scrolling: touch;
+        cursor: grab;
+        scroll-snap-type: x mandatory; /* Membuat geseran berhenti tepat di tengah kartu */
+    }
+
+    #date-slider:active { cursor: grabbing; }
+
+    /* Sembunyikan Scrollbar */
+    #date-slider::-webkit-scrollbar { display: none; }
+    #date-slider { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Tambahkan snap pada button agar rapi */
+    #date-slider button { scroll-snap-align: center; }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+
+        .day-card-active {
+            background: #1e3a8a !important;
+            color: white !important;
+            min-width: 100px;
+            box-shadow: 0 10px 20px -5px rgba(30, 58, 138, 0.4);
+        }
+    </style>
 </head>
 
-<body class="flex min-h-screen overflow-hidden p-10">
+<body class="flex min-h-screen overflow-hidden p-10 bg-slate-50">
 
-    <aside class="w-72 pt-16 pl-2 pr-16 pb-16 flex flex-col gap-8">
+    <aside class="w-72 pt-16 pl-2 pr-16 pb-16 flex flex-col gap-8 shrink-0">
         <div class="flex items-center gap-3 px-4 mb-4">
-                        <img src="assets/images/logo.png" alt="" srcset="">
-
+            <img src="assets/images/logo.png" alt="Logo">
         </div>
 
         <nav class="flex flex-col gap-1">
-            <a href="index.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
+            <a href="dashboard.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
                 <i data-lucide="layout-dashboard"></i> Dashboard
             </a>
             <a href="janji-temu.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
@@ -43,29 +75,524 @@
         </nav>
     </aside>
 
-    <main class="flex-1 bg-white my-4 mr-4 rounded-[45px] shadow-sm p-10 flex flex-col relative overflow-y-auto border border-slate-100">
+ <main class="flex-1 bg-white my-4 mr-4 rounded-[45px] shadow-sm p-10 flex flex-col relative border border-slate-100 h-[calc(100vh-6rem)] min-h-0 overflow-hidden">
+    
+    <header class="flex justify-between items-center mb-10 shrink-0">
+        <div class="relative w-1/3">
+            <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
+            <input type="text" class="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-2xl border-none focus:ring-2 focus:ring-blue-100 outline-none text-sm" placeholder="Pencarian">
+        </div>
         
-        <header class="flex justify-between items-center mb-10">
-            <div class="relative w-1/3">
-                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                <input type="text" class="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-2xl border-none focus:ring-2 focus:ring-blue-100 outline-none text-sm" placeholder="Pencarian">
-            </div>
+        <div class="flex items-center gap-4">
             <div class="flex items-center gap-3 bg-slate-100 pl-2 pr-5 py-2 rounded-full cursor-pointer hover:bg-slate-200 transition">
-                <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white text-xs">A</div>
+                <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white text-xs font-bold">A</div>
                 <span class="font-bold text-slate-700 text-sm">Admin</span>
                 <i data-lucide="chevron-down" class="w-3 h-3 text-slate-500"></i>
             </div>
-        </header>
-
-         <div class="grid h-full">
-            
         </div>
- </main>
-<script>
-        // Inisialisasi Lucide Icons
-        lucide.createIcons();
+    </header>
 
+    <div class="flex justify-between pb-10 shrink-0">
+         <div class="flex flex-col">
+            <h1 class="text-3xl font-black text-slate-800 tracking-tighter">Jadwal Praktik Dokter</h1>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Maret 2026</p>
+        </div>
+        <button onclick="openModal()" class="bg-blue-900 text-white px-6 py-3 rounded-2xl text-xs font-bold flex items-center gap-2 hover:bg-slate-800 transition shadow-lg shadow-blue-900/10">
+            <i data-lucide="plus" class="w-4 h-4"></i> Atur Jadwal Baru
+        </button>
+    </div>
+
+    <div class="flex flex-col gap-3 mb-10 shrink-0">
+        <div class="flex justify-between items-center px-2">
+            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Pilih Tanggal</span>
+            <div class="flex gap-2">
+                <button onclick="scrollSlider(-200)" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-blue-900 hover:text-white transition shadow-sm">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button onclick="scrollSlider(200)" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-blue-900 hover:text-white transition shadow-sm">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+        <div id="date-slider" class="flex flex-nowrap gap-4 overflow-x-auto py-4 px-1 custom-scrollbar scroll-smooth">
+            </div>
+    </div>
+
+    <div id="main-content-area" class="flex-1 overflow-y-auto pr-4 min-h-0 custom-scrollbar h-[calc(100vh-2rem)] min-h-0 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+            
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Kardiologi • Ruang 102</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-amber-100 text-amber-600 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Full Booked</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Sesi Praktik</p>
+                                <p class="text-sm font-black text-slate-800">13:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Kapasitas Pasien</p>
+                                <p class="text-sm font-black text-slate-800">15 / 15</p>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0a4d2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Budi Santoso</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Pediatrik • Ruang 305</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-slate-200 text-slate-500 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Day Off</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3 opacity-30">
+                            <i data-lucide="calendar-x" class="w-6 h-6"></i>
+                            <p class="text-xs font-bold  tracking-tight">Dokter tidak praktik hari ini.</p>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="edit" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Kardiologi • Ruang 102</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-amber-100 text-amber-600 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Full Booked</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Sesi Praktik</p>
+                                <p class="text-sm font-black text-slate-800">13:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Kapasitas Pasien</p>
+                                <p class="text-sm font-black text-slate-800">15 / 15</p>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0a4d2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Budi Santoso</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Pediatrik • Ruang 305</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-slate-200 text-slate-500 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Day Off</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3 opacity-30">
+                            <i data-lucide="calendar-x" class="w-6 h-6"></i>
+                            <p class="text-xs font-bold  tracking-tight">Dokter tidak praktik hari ini.</p>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="edit" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Kardiologi • Ruang 102</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-amber-100 text-amber-600 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Full Booked</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Sesi Praktik</p>
+                                <p class="text-sm font-black text-slate-800">13:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Kapasitas Pasien</p>
+                                <p class="text-sm font-black text-slate-800">15 / 15</p>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0a4d2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Budi Santoso</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Pediatrik • Ruang 305</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-slate-200 text-slate-500 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Day Off</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3 opacity-30">
+                            <i data-lucide="calendar-x" class="w-6 h-6"></i>
+                            <p class="text-xs font-bold  tracking-tight">Dokter tidak praktik hari ini.</p>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="edit" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Kardiologi • Ruang 102</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-amber-100 text-amber-600 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Full Booked</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Sesi Praktik</p>
+                                <p class="text-sm font-black text-slate-800">13:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Kapasitas Pasien</p>
+                                <p class="text-sm font-black text-slate-800">15 / 15</p>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0a4d2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Budi Santoso</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Pediatrik • Ruang 305</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-slate-200 text-slate-500 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Day Off</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3 opacity-30">
+                            <i data-lucide="calendar-x" class="w-6 h-6"></i>
+                            <p class="text-xs font-bold  tracking-tight">Dokter tidak praktik hari ini.</p>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="edit" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Kardiologi • Ruang 102</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-amber-100 text-amber-600 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Full Booked</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Sesi Praktik</p>
+                                <p class="text-sm font-black text-slate-800">13:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-900 shadow-sm transition">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase">Kapasitas Pasien</p>
+                                <p class="text-sm font-black text-slate-800">15 / 15</p>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 rounded-[35px] p-8 flex flex-col justify-between hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0a4d2d&color=fff" alt="Dokter">
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-800 text-lg group-hover:text-blue-900 transition">Dr. Budi Santoso</h3>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Pediatrik • Ruang 305</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-slate-200 text-slate-500 text-[9px] font-black rounded-lg uppercase  tracking-tighter">Day Off</div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-6">
+                        <div class="flex items-center gap-3 opacity-30">
+                            <i data-lucide="calendar-x" class="w-6 h-6"></i>
+                            <p class="text-xs font-bold  tracking-tight">Dokter tidak praktik hari ini.</p>
+                        </div>
+                        <button class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 hover:bg-blue-900 hover:text-white transition">
+                            <i data-lucide="edit" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+          
+    </div>
+</main>
+
+    <div id="scheduleModal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-10">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white w-full max-w-[500px] rounded-[50px] p-12 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <h2 class="text-2xl font-black text-slate-800 mb-8 tracking-tighter decoration-cyan-400">Atur Jadwal</h2>
+            <form class="flex flex-col gap-5">
+                <div class="flex flex-col gap-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pilih Dokter</label>
+                    <select class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none font-bold text-sm text-slate-700">
+                        <option>Dr. Petra Winsburry</option>
+                        <option>Dr. Sarah Kencana</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jam Mulai</label>
+                        <input type="time" class="p-4 bg-slate-50 rounded-2xl border-none outline-none font-bold text-sm">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jam Selesai</label>
+                        <input type="time" class="p-4 bg-slate-50 rounded-2xl border-none outline-none font-bold text-sm">
+                    </div>
+                </div>
+                <button type="button" onclick="closeModal()" class="mt-4 w-full py-5 bg-blue-900 text-white rounded-[25px] font-black tracking-widest hover:bg-slate-800 transition shadow-xl">SIMPAN JADWAL</button>
+            </form>
+        </div>
+    </div>
+
+<script>
+    lucide.createIcons();
+
+    function openModal() {
+        document.getElementById('scheduleModal').classList.remove('hidden');
+    }
+    function closeModal() {
+        document.getElementById('scheduleModal').classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('date-slider');
+    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const totalDays = 31;
+    const activeDate = 9;
+
+    for (let i = 1; i <= totalDays; i++) {
+        const dateObj = new Date(2026, 2, i); 
+        const dayName = days[dateObj.getDay()];
+        const isSelected = i === activeDate;
+
+        const button = document.createElement('button');
         
-    </script>
+        if (isSelected) {
+            button.className = "day-card-active flex flex-col items-center justify-center min-w-[100px] p-5 rounded-[30px] transition-all shrink-0";
+            button.innerHTML = `
+                <span class="text-[10px] font-black opacity-60 uppercase tracking-widest">${dayName}</span>
+                <span class="text-xl font-black mt-1">${i < 10 ? '0' + i : i}</span>
+                <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2"></div>
+            `;
+        } else {
+            button.className = "flex flex-col items-center justify-center min-w-[100px] p-5 rounded-[30px] border border-slate-100 bg-slate-50 transition-all hover:bg-slate-100 group shrink-0";
+            button.innerHTML = `
+                <span class="text-[10px] font-black text-slate-400 group-hover:text-slate-600 uppercase">${dayName}</span>
+                <span class="text-xl font-black text-slate-800 mt-1">${i < 10 ? '0' + i : i}</span>
+            `;
+        }
+
+        button.onclick = () => window.location.reload(); 
+        slider.appendChild(button);
+
+        if (isSelected) {
+            setTimeout(() => {
+                const scrollPos = button.offsetLeft - (slider.offsetWidth / 2) + (button.offsetWidth / 2);
+                slider.scrollLeft = scrollPos;
+            }, 100);
+        }
+    }
+    function scrollSlider(distance) {
+        const slider = document.getElementById('date-slider');
+        slider.scrollBy({
+            left: distance,
+            behavior: 'smooth'
+        });
+    }   
+});
+// Letakkan fungsi ini di paling luar (global scope)
+function scrollSlider(distance) {
+    const slider = document.getElementById('date-slider');
+    slider.scrollBy({
+        left: distance,
+        behavior: 'smooth'
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('date-slider');
+    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const totalDays = 31;
+    const activeDate = 19;
+
+    for (let i = 1; i <= totalDays; i++) {
+        const dateObj = new Date(2026, 2, i); 
+        const dayName = days[dateObj.getDay()];
+        const isSelected = i === activeDate;
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        
+        if (isSelected) {
+            button.className = "day-card-active flex flex-col items-center justify-center min-w-[100px] p-5 rounded-[30px] transition-all shrink-0";
+            button.innerHTML = `
+                <span class="text-[10px] font-black opacity-60 uppercase tracking-widest">${dayName}</span>
+                <span class="text-xl font-black mt-1">${i < 10 ? '0' + i : i}</span>
+                <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2"></div>
+            `;
+        } else {
+            button.className = "flex flex-col items-center justify-center min-w-[100px] p-5 rounded-[30px] border border-slate-100 bg-slate-50 transition-all hover:bg-slate-100 group shrink-0";
+            button.innerHTML = `
+                <span class="text-[10px] font-black text-slate-400 group-hover:text-slate-600 uppercase">${dayName}</span>
+                <span class="text-xl font-black text-slate-800 mt-1">${i < 10 ? '0' + i : i}</span>
+            `;
+        }
+
+        slider.appendChild(button);
+
+        if (isSelected) {
+            setTimeout(() => {
+                const scrollPos = button.offsetLeft - (slider.offsetWidth / 2) + (button.offsetWidth / 2);
+                slider.scrollLeft = scrollPos;
+            }, 150);
+        }
+    }
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => isDown = false);
+    slider.addEventListener('mouseup', () => isDown = false);
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; 
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    lucide.createIcons();
+});
+</script>
 </body>
 </html>

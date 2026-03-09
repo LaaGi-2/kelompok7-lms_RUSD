@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSUD Bakti Permana - One Stop Health Solution</title>
+    <link rel="stylesheet" href="view/assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+    
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    
+        .animate-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        /* Animasi Mengambang */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <nav class="fixed top-0 w-full z-[100] glass-nav">
+        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="view/assets/images/logo.png" alt="" class="w-32">
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="text-sm font-bold text-blue-900">Beranda</a>
+                <a href="#layanan" class="text-sm font-bold text-slate-400 hover:text-blue-900 transition">Layanan</a>
+                <a href="#dokter" class="text-sm font-bold text-slate-400 hover:text-blue-900 transition">Dokter</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="view/auth/login.html" class="hidden sm:block text-sm font-bold text-slate-500 mr-4">Staf Login</a>
+                <button onclick="openModal()" class="bg-blue-900 text-white px-7 py-3 rounded-2xl text-sm font-bold hover:bg-slate-800 transition shadow-xl shadow-blue-900/10">
+                    Janji Temu
+                </button>
+            </div>
+        </div>
+    </nav>
+<div id="appointmentModal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 md:p-10">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+
+    <div class="relative bg-white w-full max-w-[1000px] h-auto max-h-[90vh] rounded-[50px] shadow-2xl overflow-hidden flex flex-col lg:flex-row animate-in fade-in zoom-in duration-300">
+        
+        <button onclick="closeModal()" class="absolute top-6 right-6 z-50 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white lg:text-slate-400 lg:bg-slate-100 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="lg:w-1/3 bg-blue-900 p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden shrink-0">
+            <div class="relative z-10">
+                <div class="w-12 h-12 bg-cyan-400 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-cyan-400/20">
+                    <i data-lucide="heart-pulse" class="text-blue-900 w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-black text-white leading-tight italic tracking-tighter">
+                    Langkah Kecil <br>untuk Hidup <br>Lebih Sehat.
+                </h2>
+                <p class="text-blue-200 mt-6 text-xs font-medium leading-relaxed">
+                    Pendaftaran online memudahkan Anda mendapatkan nomor antrean lebih awal tanpa harus menunggu di rumah sakit.
+                </p>
+            </div>
+
+            <div class="mt-10 lg:mt-0 relative z-10 space-y-4">
+                <div class="flex items-center gap-3 text-white/70">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest">Data Terenkripsi Aman</span>
+                </div>
+            </div>
+
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="lg:w-2/3 p-8 lg:p-14 overflow-y-auto custom-scrollbar">
+            <div class="mb-8">
+                <h3 class="text-2xl font-black text-slate-800 tracking-tight">Formulir Pendaftaran</h3>
+                <p class="text-slate-400 text-xs font-medium">Lengkapi data pasien di bawah ini secara akurat.</p>
+            </div>
+
+            <form action="#" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Pasien</label>
+                    <input type="text" placeholder="Nama lengkap sesuai KTP" 
+                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">WhatsApp</label>
+                    <input type="tel" placeholder="0812xxxx" 
+                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Layanan</label>
+                    <select class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium text-slate-500 appearance-none">
+                        <option value="">Pilih Departemen</option>
+                        <option value="umum">Umum</option>
+                        <option value="jantung">Kardiologi</option>
+                        <option value="anak">Pediatrik</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Rencana Tanggal Kunjungan</label>
+                    <input type="date" class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium text-slate-500">
+                </div>
+
+                <div class="md:col-span-2 mt-4 flex flex-col md:flex-row gap-4">
+                    <button type="submit" class="flex-1 py-5 bg-blue-900 text-white rounded-[25px] font-bold shadow-xl shadow-blue-900/20 hover:bg-slate-800 transition active:scale-95">
+                        KONFIRMASI JADWAL
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <section id="home" class="pt-40 pb-20 hero-gradient relative overflow-hidden">
+        <div class="blob top-0 right-0"></div>
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+                    Terakreditasi Paripurna
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter mb-8 text-slate-900">
+                    Kesehatan Anda, <br><span class="text-blue-900">Prioritas Utama</span> Kami.
+                </h1>
+                <p class="text-lg text-slate-500 leading-relaxed mb-10 max-w-lg font-medium">
+                    RSUD Bakti Permana hadir dengan teknologi medis terkini dan tim dokter spesialis berpengalaman untuk memberikan pelayanan kesehatan terbaik bagi keluarga Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-blue-900 text-white px-10 py-5 rounded-[25px] font-bold flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl shadow-blue-900/20">
+                        Buat Janji Temu <i data-lucide="calendar"></i>
+                    </button>
+                    <button class="bg-white border border-slate-200 px-10 py-5 rounded-[25px] font-bold text-slate-600 flex items-center justify-center gap-3 hover:bg-slate-50 transition">
+                        Lihat Fasilitas <i data-lucide="play-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl"></div>
+                <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1200" 
+                    class="rounded-[50px] shadow-2xl w-full h-[550px] object-cover border-[12px] border-white" alt="Hospital Interior">
+                
+                <div class="absolute bottom-10 -left-10 bg-white p-6 rounded-[30px] shadow-2xl border border-slate-50 flex items-center gap-5 animate-bounce-slow">
+                    <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="clock" class="text-green-600 w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Layanan Darurat</p>
+                        <p class="text-lg font-bold text-slate-800">24 Jam Standby</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="layanan" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-6 text-center lg:text-left">
+                <div>
+                    <h4 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em] mb-4 italic">Spesialisasi</h4>
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter leading-none">Layanan Unggulan Kami</h2>
+                </div>
+                <p class="text-slate-400 max-w-sm font-medium">Layanan medis komprehensif didukung oleh teknologi mutakhir dan tim profesional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group p-10 bg-slate-50 rounded-[45px] hover:bg-blue-900 transition-all duration-500 cursor-pointer border border-transparent hover:scale-[1.02]">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-white/10 transition-colors">
+                        <i data-lucide="heart-pulse" class="text-blue-900 w-7 h-7 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-white">Kardiologi</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed">Perawatan jantung intensif dengan tim spesialis bedah jantung terbaik.</p>
+                </div>
+
+                <div class="group p-10 bg-slate-50 rounded-[45px] hover:bg-blue-900 transition-all duration-500 cursor-pointer border border-transparent hover:scale-[1.02]">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-white/10 transition-colors">
+                        <i data-lucide="baby" class="text-blue-900 w-7 h-7 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-white">Pediatrik</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed">Layanan kesehatan anak yang ramah dan menyenangkan bagi si kecil.</p>
+                </div>
+
+                <div class="group p-10 bg-slate-50 rounded-[45px] hover:bg-blue-900 transition-all duration-500 cursor-pointer border border-transparent hover:scale-[1.02]">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-white/10 transition-colors">
+                        <i data-lucide="brain" class="text-blue-900 w-7 h-7 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-white">Neurologi</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed">Penanganan gangguan saraf dan otak secara komprehensif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dokter" class="py-32 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-4">Bertemu Tim Ahli Kami</h2>
+                <p class="text-slate-400 font-medium">Dokter berdedikasi tinggi dengan pengalaman puluhan tahun.</p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+                <div class="group">
+                    <div class="relative h-[350px] overflow-hidden rounded-[40px] mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Petra&background=0a2d4d&color=fff" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 scale-110">
+                        <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center gap-3">
+                            <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-900"><i data-lucide="instagram" class="w-4 h-4"></i></button>
+                            <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-900"><i data-lucide="linkedin" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-black text-slate-800 leading-none">Dr. Petra Winsburry</h3>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-2">Ahli Bedah Saraf</p>
+                </div>
+                <div class="group">
+                    <div class="relative h-[350px] overflow-hidden rounded-[40px] mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Sarah&background=4d0a2d&color=fff" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 scale-110">
+                        <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center gap-3">
+                            <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-900"><i data-lucide="instagram" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-black text-slate-800 leading-none">Dr. Sarah Kencana</h3>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-2">Spesialis Jantung</p>
+                </div>
+                
+                <div class="group">
+                    <div class="relative h-[350px] overflow-hidden rounded-[40px] mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Budi&background=0a4d2d&color=fff" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 scale-110">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-800 leading-none">Dr. Budi Santoso</h3>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-2">Spesialis Anak</p>
+                </div>
+
+                <div class="group">
+                    <div class="relative h-[350px] overflow-hidden rounded-[40px] mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Lisa&background=4d4d0a&color=fff" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 scale-110">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-800 leading-none">Dr. Lisa Permata</h3>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-2">Dermatologi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak" class="bg-white pt-32 pb-10 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-4 gap-12 mb-24">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-3 mb-10">
+                                  <img src="view/assets/images/logo.png" alt="" class="w-32">
+                </div>
+                <p class="text-slate-400 max-w-sm text-lg font-medium leading-relaxed">
+                    Menghadirkan pelayanan kesehatan berkelas dunia di tengah masyarakat Kota Sejahtera.
+                </p>
+            </div>
+            
+            <div>
+                <h5 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-8">Navigasi</h5>
+                <ul class="space-y-4 text-sm font-bold text-slate-800">
+                      
+       
+                    <li><a href="#home" class="hover:text-blue-900">Beranda</a>
+                    </li>
+                    <li>
+                        <a href="#layanan" class="hover:text-blue-900">Layanan</a>        
+                    </li>
+                    <li>
+                        <a href="#dokter" class="hover:text-blue-900">Dokter</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-8">Kontak</h5>
+                <ul class="space-y-4 text-sm font-bold text-slate-800">
+                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-blue-900"></i> (021) 1234-567</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-blue-900"></i> halo@rsudbp.com</li>
+                    <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-blue-900"></i> Kota Sejahtera, Indonesia</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pt-10 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6 px-8 max-w-7xl mx-auto">
+            <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest italic">&copy; 2026 RSUD Bakti Permana. Managed by Kelompok 6.</p>
+            <div class="flex gap-6">
+                <i data-lucide="facebook" class="w-4 h-4 text-slate-300 hover:text-blue-900 cursor-pointer"></i>
+                <i data-lucide="instagram" class="w-4 h-4 text-slate-300 hover:text-blue-900 cursor-pointer"></i>
+                <i data-lucide="twitter" class="w-4 h-4 text-slate-300 hover:text-blue-900 cursor-pointer"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    
+        // Inisialisasi Icons
+        lucide.createIcons();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-xl', 'py-1');
+            } else {
+                nav.classList.remove('shadow-xl', 'py-1');
+            }
+        });
+
+         function openModal() {
+        const modal = document.getElementById('appointmentModal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+        lucide.createIcons();
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('appointmentModal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - RSUD Bakti Permana</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        .register-card {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 h-screen flex items-center justify-center p-6">
+
+    <div class="register-card bg-white w-full max-w-[1100px] h-[750px] rounded-[50px] shadow-2xl shadow-blue-900/5 flex overflow-hidden border border-slate-100">
+        
+        <div class="hidden lg:block w-5/12 bg-blue-900 relative p-12 overflow-hidden">
+            <div class="relative h-full flex flex-col justify-between z-10">
+                <img src="../assets/images/logo-white.png" alt="" class="w-48">
+                <div>
+                    <h2 class="text-4xl font-black text-white">
+                        Gabung dalam<br>Ekosistem Digital Kami.
+                    </h2>
+                    <p class="text-blue-200 mt-4 text-sm font-medium leading-relaxed">
+                        Mulai kelola data pasien, departemen, dan jadwal dokter dengan sistem yang lebih cerdas dan efisien.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 text-white">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Akses Dashboard 24/7</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-white">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Manajemen Tim Medis</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-white">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Laporan Real-time</span>
+                    </div>
+                </div>
+
+                <div class="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em]">
+                    &copy; 2026 Kelompok 7
+                </div>
+            </div>
+
+            <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-800 rounded-full"></div>
+            <div class="absolute top-0 left-0 w-full h-full opacity-30 mix-blend-overlay">
+                <img src="../assets/images/assets-2.jpg" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <div class="w-full lg:w-7/12 p-10 md:p-16 flex flex-col justify-center overflow-y-auto custom-scroll">
+            <div class="mb-8">
+                <h1 class="text-3xl font-black text-slate-800 tracking-tight">Buat Akun Baru</h1>
+                <p class="text-slate-400 mt-1 font-medium">Lengkapi data untuk mendaftar sebagai administrator</p>
+            </div>
+
+            <form action="login.html" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="text" placeholder="Masukkan nama lengkap" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="email" placeholder="admin@rsud-bp.com" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Jabatan</label>
+                    <div class="relative">
+                        <i data-lucide="briefcase" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <select class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-500 appearance-none">
+                            <option value="">Pilih Jabatan</option>
+                            <option value="admin">Administrator</option>
+                            <option value="staff">Staf IT</option>
+                            <option value="manager">Manajer Operasional</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Password</label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="password" placeholder="••••••••" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Konfirmasi</label>
+                    <div class="relative">
+                        <i data-lucide="shield-check" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
+                        <input type="password" placeholder="••••••••" 
+                            class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 mt-2">
+                    <button type="submit" class="w-full py-5 bg-blue-900 text-white rounded-[20px] font-bold shadow-lg shadow-blue-900/10 hover:bg-slate-800 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                        DAFTARKAN AKUN
+                    </button>
+                    <p class="text-center mt-6 text-xs font-medium text-slate-400">
+                        Sudah punya akun? 
+                        <a href="login.html" class="text-blue-600 font-bold hover:underline">Masuk Sekarang</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSUD Bakti Permana - Dashboard</title>
     <link rel="stylesheet" href="assets/css/main.css">
-     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Mempercantik scrollbar agar tipis */
+        #main-content-area::-webkit-scrollbar { width: 5px; }
+        #main-content-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
 </head>
 
-<body class="flex min-h-screen overflow-hidden p-10">
+<body class="flex h-screen overflow-hidden p-6 md:p-10 bg-slate-50">
 
     <aside class="w-72 pt-16 pl-2 pr-16 pb-16 flex flex-col gap-8">
         <div class="flex items-center gap-3 px-4 mb-4">
@@ -19,7 +23,7 @@
         </div>
 
         <nav class="flex flex-col gap-1">
-            <a href="index.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
+            <a href="dashboard.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
                 <i data-lucide="layout-dashboard"></i> Dashboard
             </a>
             <a href="janji-temu.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
@@ -43,29 +47,233 @@
         </nav>
     </aside>
 
-    <main class="flex-1 bg-white my-4 mr-4 rounded-[45px] shadow-sm p-10 flex flex-col relative overflow-y-auto border border-slate-100">
+    <main class="flex-1 bg-white rounded-[45px] shadow-sm p-10 flex flex-col border border-slate-100 h-full min-h-0 relative">
         
-        <header class="flex justify-between items-center mb-10">
-            <div class="relative w-1/3">
-                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                <input type="text" class="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-2xl border-none focus:ring-2 focus:ring-blue-100 outline-none text-sm" placeholder="Pencarian">
+        <header class="flex justify-between items-center mb-8 shrink-0">
+            <div class="flex items-center flex-1">
+                <button id="back-button" onclick="backToGrid()" 
+                    class="transition-all duration-300 opacity-0 w-0 h-12 bg-slate-100 rounded-2xl flex items-center justify-center pointer-events-none overflow-hidden mr-0">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-slate-700"></i>
+                </button>
+
+                <div class="relative w-full max-w-[400px]">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
+                    <input type="text" class="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-2xl border-none focus:ring-2 focus:ring-blue-100 outline-none text-sm" placeholder="Pencarian">
+                </div>
             </div>
-            <div class="flex items-center gap-3 bg-slate-100 pl-2 pr-5 py-2 rounded-full cursor-pointer hover:bg-slate-200 transition">
+            
+          <div class="flex items-center gap-3 bg-slate-100 pl-2 pr-5 py-2 rounded-full cursor-pointer hover:bg-slate-200 transition">
                 <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white text-xs">A</div>
                 <span class="font-bold text-slate-700 text-sm">Admin</span>
                 <i data-lucide="chevron-down" class="w-3 h-3 text-slate-500"></i>
             </div>
         </header>
 
-        <div class="grid h-full">
+        <div id="main-content-area" class="flex-1 overflow-y-auto pr-4 min-h-0">
             
+            <div id="department-grid-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
+                <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+
+                  <div class="bg-white border border-slate-100 rounded-[35px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="h-44 overflow-hidden">
+                        <img src="assets/images/assets-1.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-slate-800 text-lg">Layanan Umum</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">Layanan kesehatan menyeluruh untuk keluarga.</p>
+                        <button onclick="showDetail('Layanan Umum', 'assets/images/assets-1.png')" class="mt-5 w-full py-3 bg-slate-900 text-white text-[10px] font-bold rounded-xl uppercase tracking-widest hover:bg-blue-900 transition">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="department-description-view" class="hidden flex flex-col gap-10 pb-20">
+                <div class="w-full h-72 rounded-[40px] overflow-hidden shadow-lg shrink-0">
+                    <img id="detail-banner" src="" class="w-full h-full object-cover" alt="Banner">
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <h2 id="dept-title-display" class="text-3xl font-black text-slate-800">Layanan Umum</h2>
+                    <div class="flex items-center gap-3">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tim Medis:</span>
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 border-2 border-white"></div>
+                            <div class="w-8 h-8 rounded-full bg-red-500 border-2 border-white"></div>
+                            <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[8px] font-bold">+7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="flex flex-col gap-3">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-wider">Tentang</h4>
+                    <p class="text-lg text-slate-600 leading-relaxed text-justify">
+                        Bagian ini akan sangat panjang untuk memastikan scroll bekerja. Departemen Layanan Umum di RSUD Bakti Permana didedikasikan untuk menyediakan layanan kesehatan komprehensif bagi pasien dari segala usia. Tim dokter dan tenaga medis profesional kami yang berpengalaman fokus pada pencegahan, diagnosis, dan pengobatan berbagai kondisi medis. 
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed text-justify mt-4">
+                        Kami menekankan pendekatan holistik dalam perawatan kesehatan, dengan mempertimbangkan aspek fisik, emosional, dan sosial dari kesehatan. Tujuan kami adalah memastikan setiap pasien menerima perawatan personal yang disesuaikan dengan kebutuhan unik mereka, mempromosikan kesejahteraan secara keseluruhan dan kesehatan jangka panjang.
+                    </p>
+                </section>
+                <section class="flex flex-col gap-6">
+                <h4 class="text-sm font-black text-slate-400 uppercase tracking-wider">Layanan Kami</h4>
+                <div class="flex flex-col gap-6">
+                    <div class="flex gap-4">
+                        <div class="mt-2 w-2 h-2 rounded-full bg-cyan-900 shrink-0"></div>
+                        <div>
+                            <h5 class="text-lg font-black text-slate-800">Pemeriksaan Rutin</h5>
+                            <p class="text-lg text-justify text-slate-500 leading-relaxed mt-1">Penilaian kesehatan berkala untuk memantau dan menjaga kesehatan secara keseluruhan, termasuk pemeriksaan fisik, skrining kesehatan, dan perawatan preventif.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="mt-2 w-2 h-2 rounded-full bg-cyan-900 shrink-0"></div>
+                        <div>
+                            <h5 class="text-lg font-black text-slate-800">Manajemen Penyakit Kronis</h5>
+                            <p class="text-lg text-justify text-slate-500 leading-relaxed mt-1">Rencana perawatan komprehensif untuk mengelola kondisi kronis seperti diabetes, hipertensi, dan asma, yang bertujuan untuk meningkatkan kualitas hidup dan mencegah komplikasi.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="mt-2 w-2 h-2 rounded-full bg-cyan-900 shrink-0"></div>
+                        <div>
+                            <h5 class="text-lg font-black text-slate-800">Pengobatan Penyakit Akut</h5>
+                            <p class="text-lg text-justify text-slate-500 leading-relaxed mt-1">Perawatan cepat dan efektif untuk penyakit akut seperti infeksi, flu, dan cedera ringan, memastikan pemulihan yang cepat dan meminimalkan ketidaknyamanan.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                <section class="flex flex-col gap-6">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-wider">Tim Spesialis</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-6 bg-slate-50 rounded-[30px] border border-slate-100 flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-blue-900 shrink-0"></div>
+                            <div>
+                                <h6 class="font-bold text-slate-800">Dr. Petra Winsburry</h6>
+                                <p class="text-xs text-slate-400">Senior Consultant</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
- </main>
-<script>
-        // Inisialisasi Lucide Icons
+    </main>
+
+    <script>
         lucide.createIcons();
 
-        
+        const gridView = document.getElementById('department-grid-view');
+        const descView = document.getElementById('department-description-view');
+        const backBtn = document.getElementById('back-button');
+        const mainContentArea = document.getElementById('main-content-area');
+
+        function showDetail(title, bannerUrl) {
+            gridView.classList.add('hidden');
+            descView.classList.remove('hidden');
+            
+            document.getElementById('dept-title-display').innerText = title;
+            document.getElementById('detail-banner').src = bannerUrl;
+
+            backBtn.classList.remove('w-0', 'opacity-0', 'pointer-events-none', 'mr-0');
+            backBtn.classList.add('w-14', 'opacity-100', 'pointer-events-auto', 'mr-4');
+            
+            mainContentArea.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToGrid() {
+            descView.classList.add('hidden');
+            gridView.classList.remove('hidden');
+
+            backBtn.classList.add('w-0', 'opacity-0', 'pointer-events-none', 'mr-0');
+            backBtn.classList.remove('w-14', 'opacity-100', 'pointer-events-auto', 'mr-4');
+            
+            mainContentArea.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
