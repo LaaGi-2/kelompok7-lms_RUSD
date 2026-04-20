@@ -77,12 +77,12 @@
                 <p class="text-slate-400 mt-1 font-medium">Lengkapi data untuk mendaftar sebagai administrator</p>
             </div>
 
-            <form action="login.html" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <form action="daftar.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="flex flex-col gap-2 md:col-span-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                     <div class="relative">
                         <i data-lucide="user" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="text" placeholder="Masukkan nama lengkap" 
+                        <input type="text" name="name" placeholder="Masukkan nama lengkap" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
                     <div class="relative">
                         <i data-lucide="mail" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="email" placeholder="admin@rsud-bp.com" 
+                        <input type="email" name="mail" placeholder="admin@rsud-bp.com" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
                     </div>
                 </div>
@@ -100,11 +100,11 @@
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Jabatan</label>
                     <div class="relative">
                         <i data-lucide="briefcase" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <select class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-500 appearance-none">
+                        <select name="position" class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-500 appearance-none">
                             <option value="">Pilih Jabatan</option>
-                            <option value="admin">Administrator</option>
-                            <option value="staff">Staf IT</option>
-                            <option value="manager">Manajer Operasional</option>
+                            <option value="ADMINISTRATOR">Administrator</option>
+                            <option value="STAFF IT">Staf IT</option>
+                            <option value="MANAJER OPERASIONAL">Manajer Operasional</option>
                         </select>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Password</label>
                     <div class="relative">
                         <i data-lucide="lock" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="password" placeholder="••••••••" 
+                        <input type="password" name="password" placeholder="••••••••" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Konfirmasi</label>
                     <div class="relative">
                         <i data-lucide="shield-check" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="password" placeholder="••••••••" 
+                        <input type="password" name="password" placeholder="••••••••" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium">
                     </div>
                 </div>

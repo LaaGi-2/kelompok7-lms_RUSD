@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - RSUD Bakti Permana</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -30,12 +30,12 @@
                 <p class="text-slate-400 mt-2 font-medium">Silakan masuk ke akun administrator Anda</p>
             </div>
 
-            <form action="../dashboard.html" class="flex flex-col gap-5">
+            <form action="tambah.php" method="POST" class="flex flex-col gap-5" required>
                 <div class="flex flex-col gap-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
                     <div class="relative">
                         <i data-lucide="mail" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="email" placeholder="admin@rsud-bp.com" 
+                        <input type="email" name="mail" placeholder="admin@rsud-bp.com" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-700">
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="relative">
                         <i data-lucide="lock" class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5"></i>
-                        <input type="password" placeholder="••••••••" 
+                        <input type="password" name="password" placeholder="••••••••" 
                             class="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none transition text-sm font-medium text-slate-700">
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             <div class="md:col-span-2 mt-2">
                     <p class="text-center mt-6 text-xs font-medium text-slate-400">
                         Belum punya akun? 
-                        <a href="register.html" class="text-blue-600 font-bold hover:underline">Daftar Sekarang</a>
+                        <a href="../register/register.php" class="text-blue-600 font-bold hover:underline">Daftar Sekarang</a>
                     </p>
                 </div>
         </div>
@@ -76,7 +76,7 @@
             <div class="absolute bottom-40 left-10 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl"></div>
             
             <div class="relative h-full flex flex-col justify-between z-10">
-                <img src="../assets/images/logo-white.png" alt="logo" class="w-48" >
+                <img src="aset\logo-white.png" alt="logo" class="w-48" >
 
                 <div>
                     <h2 class="text-5xl font-black text-white">
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <img src="../assets/images/pattern.png" 
+            <img src="aset/pattern.png" 
                 class="absolute inset-0 w-full h-full object-cover mix-blend-overlay">
         </div>
 
