@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSUD Bakti Permana - One Stop Health Solution</title>
-    <link rel="stylesheet" href="view/assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -47,7 +47,7 @@
     <nav class="fixed top-0 w-full z-[100] glass-nav">
         <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="view/assets/images/logo.png" alt="" class="w-32">
+                <img src="../assets/images/logo.png" alt="" class="w-32">
             </div>
             
             <div class="hidden lg:flex items-center gap-8">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="view/auth/login.html" class="hidden sm:block text-sm font-bold text-slate-500 mr-4">Staf Login</a>
+                <a href="../auth/login/login.php" class="hidden sm:block text-sm font-bold text-slate-500 mr-4">Staf Login</a>
                 <button onclick="openModal()" class="bg-blue-900 text-white px-7 py-3 rounded-2xl text-sm font-bold hover:bg-slate-800 transition shadow-xl shadow-blue-900/10">
                     Janji Temu
                 </button>
@@ -271,7 +271,7 @@
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-4 gap-12 mb-24">
             <div class="lg:col-span-2">
                 <div class="flex items-center gap-3 mb-10">
-                                  <img src="view/assets/images/logo.png" alt="" class="w-32">
+                                  <img src="../assets/images/logo.png" alt="" class="w-32">
                 </div>
                 <p class="text-slate-400 max-w-sm text-lg font-medium leading-relaxed">
                     Menghadirkan pelayanan kesehatan berkelas dunia di tengah masyarakat Kota Sejahtera.
