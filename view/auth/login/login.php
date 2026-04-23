@@ -30,7 +30,7 @@
                 <p class="text-slate-400 mt-2 font-medium">Silakan masuk ke akun administrator Anda</p>
             </div>
 
-            <form action="tambah.php" method="POST" class="flex flex-col gap-5" required>
+            <form action="../../dashboard.html" method="POST" class="flex flex-col gap-5" required>
                 <div class="flex flex-col gap-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
                     <div class="relative">
