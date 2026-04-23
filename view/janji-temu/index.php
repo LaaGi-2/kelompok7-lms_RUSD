@@ -24,7 +24,7 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-        }
+        }        
 
         /* Animasi Mengambang */
         .floating {
