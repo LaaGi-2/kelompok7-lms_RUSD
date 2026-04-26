@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - RSUD Bakti Permana</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="/public/assets/css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -29,7 +29,7 @@
         
         <div class="hidden lg:block w-5/12 bg-blue-900 relative p-12 overflow-hidden">
             <div class="relative h-full flex flex-col justify-between z-10">
-                <img src="../assets/images/logo-white.png" alt="" class="w-48">
+                <img src="/public/assets/images/logo-white.png" alt="" class="w-48">
                 <div>
                     <h2 class="text-4xl font-black text-white">
                         Gabung dalam<br>Ekosistem Digital Kami.
@@ -67,7 +67,7 @@
 
             <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-800 rounded-full"></div>
             <div class="absolute top-0 left-0 w-full h-full opacity-30 mix-blend-overlay">
-                <img src="../assets/images/assets-2.jpg" class="w-full h-full object-cover">
+                <img src="/public/assets/images/assets-2.jpg" class="w-full h-full object-cover">
             </div>
         </div>
 
@@ -77,7 +77,7 @@
                 <p class="text-slate-400 mt-1 font-medium">Lengkapi data untuk mendaftar sebagai administrator</p>
             </div>
 
-            <form action="daftar.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <form action="admin/dashboard" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="flex flex-col gap-2 md:col-span-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                     <div class="relative">
@@ -133,7 +133,7 @@
                     </button>
                     <p class="text-center mt-6 text-xs font-medium text-slate-400">
                         Sudah punya akun? 
-                        <a href="login.html" class="text-blue-600 font-bold hover:underline">Masuk Sekarang</a>
+                        <a href="login" class="text-blue-600 font-bold hover:underline">Masuk Sekarang</a>
                     </p>
                 </div>
             </form>
