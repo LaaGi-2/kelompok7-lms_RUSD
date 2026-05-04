@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,22 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e2e8f0; border-radius: 10px; }
-        .sidebar-item-active { background-color: #f8fafc; border-radius: 16px; color: #1e3a8a !important; }
-    </style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #e2e8f0;
+        border-radius: 10px;
+    }
+
+    .sidebar-item-active {
+        background-color: #f8fafc;
+        border-radius: 16px;
+        color: #1e3a8a !important;
+    }
+</style>
+
 <body class="flex min-h-screen overflow-hidden p-10 bg-slate-50">
 
     <aside class="w-72 pt-16 pl-2 pr-16 pb-16 flex flex-col gap-8">
@@ -21,7 +34,7 @@
         </div>
 
         <nav class="flex flex-col gap-1">
-            <a  href="dashboard" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
+            <a href="dashboard" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
                 <i data-lucide="layout-dashboard"></i> Dashboard
             </a>
             <a href="janji-temu.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
@@ -30,7 +43,7 @@
             <a href="pasien.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
                 <i data-lucide="users"></i> Pasien
             </a>
-            <a  href="dokter" class="sidebar-item-active p-4 flex items-center gap-4 font-semibold">
+            <a href="dokter" class="sidebar-item-active p-4 flex items-center gap-4 font-semibold">
                 <i data-lucide="stethoscope" class="text-blue-900"></i> Dokter
             </a>
             <a href="jadwal-dokter.html" class="p-4 flex items-center gap-4 text-slate-400 hover:text-blue-900 transition font-medium">
@@ -46,10 +59,10 @@
     </aside>
 
     <main class="flex-1 bg-white my-4 mr-4 rounded-[45px] shadow-sm p-10 flex flex-col relative overflow-hidden border border-slate-100">
-        
+
         <header class="flex justify-between items-center mb-10 shrink-0">
             <div class="flex items-center gap-0" id="header-left-section">
-                <button id="back-button" onclick="backToList()" 
+                <button id="back-button" onclick="backToList()"
                     class="overflow-hidden transition-all duration-500 ease-in-out opacity-0 w-0 h-12 bg-slate-100 rounded-2xl hover:bg-slate-200 flex items-center justify-center mr-0 pointer-events-none">
                     <i data-lucide="arrow-left" class="w-5 h-5 text-slate-700 min-w-[20px]"></i>
                 </button>
@@ -68,47 +81,67 @@
         </header>
 
         <div id="main-content-area" class="flex-1 overflow-y-auto pr-2 custom-scrollbar">
-            
+
             <div id="doctor-list-view" class="flex flex-col gap-4 animate-in fade-in duration-500">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-2xl font-black text-slate-800">Manajemen Dokter</h2>
-                   <button onclick="openAddDoctorModal()" class="bg-blue-900 text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-950 transition flex items-center gap-2 shadow-lg shadow-blue-900/10">
+                    <button onclick="location.href='<?= BASEURL ?>/admin/dokter/create'" class="bg-blue-900 text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-950 transition flex items-center gap-2 shadow-lg shadow-blue-900/10">
                         <i data-lucide="plus" class="w-4 h-4"></i> Tambah Dokter
                     </button>
                 </div>
-                
-                
-                <div onclick="showDoctorDetail('Dr. Petra Winsburry', '19880503 201501 1 002', 'Bedah Saraf')" class="group flex items-center gap-6 p-6 bg-slate-50 rounded-[30px] border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all cursor-pointer">
-                    <div class="w-16 h-16 rounded-2xl bg-slate-200 overflow-hidden border-2 border-white shadow-sm shrink-0">
-                        <img src="https://ui-avatars.com/api/?name=Petra+Winsburry&background=0a2d4d&color=fff" alt="Petra">
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex items-center gap-3">
-                            <h3 class="text-lg font-black text-slate-800 group-hover:text-blue-900 transition">Dr. Petra Winsburry</h3>
-                            <span class="px-3 py-0.5 bg-blue-100 text-blue-600 text-[10px] font-black rounded-md uppercase tracking-wider">Spesialis</span>
-                        </div>
-                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-tighter">Bedah Saraf • NIP: 19880503 201501 1 002</p>
-                    </div>
-                    <i data-lucide="chevron-right" class="text-slate-300 group-hover:text-blue-900 transition"></i>
-                </div>
 
-                <div onclick="showDoctorDetail('Dr. Sarah Kencana', '19921210 201803 2 005', 'Kardiologi')" class="group flex items-center gap-6 p-6 bg-slate-50 rounded-[30px] border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all cursor-pointer">
-                    <div class="w-16 h-16 rounded-2xl bg-slate-200 overflow-hidden border-2 border-white shadow-sm shrink-0">
-                        <img src="https://ui-avatars.com/api/?name=Sarah+Kencana&background=4d0a2d&color=fff" alt="Sarah">
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex items-center gap-3">
-                            <h3 class="text-lg font-black text-slate-800 group-hover:text-blue-900 transition">Dr. Sarah Kencana</h3>
-                            <span class="px-3 py-0.5 bg-emerald-100 text-emerald-600 text-[10px] font-black rounded-md uppercase tracking-wider">Aktif</span>
-                        </div>
-                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-tighter">Kardiologi • NIP: 19921210 201803 2 005</p>
-                    </div>
-                    <i data-lucide="chevron-right" class="text-slate-300 group-hover:text-blue-900 transition"></i>
+                <div class="overflow-hidden rounded-lg shadow-sm">
+                    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">ID</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">No. STR</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nama Dokter</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">Spesialis</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">Email Resmi</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900">Ruang Praktek</th>
+                                <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <?php foreach ($dataDokter as $row) : ?>
+                                <tr class="hover:bg-slate-100 transition-colors">
+                                    <td class="px-6 py-4 font-semibold text-gray-700">#<?= $row['id_dokter']; ?></td>
+                                    <td class="px-6 py-4"><?= $row['no_str']; ?></td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-medium text-gray-900"><?= $row['nama_dokter']; ?></div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-600">
+                                            <?= $row['spesialisasi']; ?>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4"><?= $row['email_resmi']; ?></td>
+                                    <td class="px-6 py-4"><?= $row['ruangan_praktek']; ?></td>
+                                    <td class="px-6 py-4 text-center">
+                                        <a href="<?= BASEURL ?>/admin/dokter/profil/<?= $row['id_dokter']; ?>"
+                                            class="inline-block rounded-md bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700 transition-all">
+                                            Detail
+                                        </a>
+                                        <a href="<?= BASEURL ?>/admin/dokter/edit/<?= $row['id_dokter']; ?>"
+                                            class="inline-block rounded-md bg-yellow-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-yellow-700 transition-all">
+                                            <i data-lucide="edit-3" class="inline-block w-4 h-4"></i>
+
+                                        </a>
+                                        <a href="<?= BASEURL ?>/admin/dokter/delete/<?= $row['id_dokter']; ?>"
+                                            class="inline-block rounded-md bg-red-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-red-700 transition-all">
+                                            <i data-lucide="trash-2" class="inline-block w-4 h-4"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <div id="doctor-detail-view" class="hidden flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-right duration-500 pb-10">
-                
+
                 <div class="flex-1 flex flex-col gap-6">
                     <div class="flex items-center gap-6 p-6 bg-slate-100 rounded-[35px]">
                         <div class="w-24 h-24 rounded-2xl border-4 border-white shadow-sm overflow-hidden bg-slate-300 shrink-0">
@@ -223,7 +256,7 @@
                         <div class="flex justify-end items-start relative z-20 mt-2">
                             <i data-lucide="activity" class="text-white/30 w-8 h-8"></i>
                         </div>
-                        
+
                         <div class="relative z-20">
                             <p class="text-[9px] text-white/50 uppercase tracking-[0.2em]">Nama Pemegang</p>
                             <p id="card-name" class="font-black text-sm tracking-tight truncate uppercase"></p>
@@ -265,82 +298,6 @@
             </div>
         </div>
     </main>
-<div id="addDoctorModal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 md:p-10">
-    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeAddDoctorModal()"></div>
-
-    <div class="relative bg-white w-full max-w-[900px] h-auto max-h-[90vh] rounded-[50px] shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
-        
-        <div class="md:w-1/3 bg-blue-900 p-10 flex flex-col justify-between relative overflow-hidden shrink-0">
-            <div class="relative z-10">
-                <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
-                    <i data-lucide="user-plus" class="text-white w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl font-black text-white leading-tight  tracking-tighter">Registrasi <br>Tenaga Medis Baru</h2>
-                <p class="text-blue-200 mt-4 text-[10px] font-medium leading-relaxed uppercase tracking-widest">Manajemen SDM RSUD BP</p>
-            </div>
-            
-            <div class="relative z-10 p-6 bg-white/10 rounded-3xl border border-white/10 backdrop-blur-sm">
-                <p class="text-[10px] text-blue-100 leading-relaxed font-medium">Pastikan data NIP dan Nomor STR sudah divalidasi oleh bagian kepegawaian sebelum diinput ke sistem.</p>
-            </div>
-            
-            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-400 opacity-20 rounded-full blur-3xl"></div>
-        </div>
-
-        <div class="flex-1 p-10 overflow-y-auto custom-scrollbar mt-4">
-             <button onclick="closeAddDoctorModal()" class="absolute top-6 right-6 z-50 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white lg:text-slate-400 lg:bg-slate-100 transition">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <form action="tambah.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="flex flex-col gap-2 md:col-span-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap & Gelar</label>
-                    <input type="text" name="nama_dokter" placeholder="Contoh: Dr. Petra Winsburry, Sp.BS" 
-                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">NIP / ID Staf</label>
-                    <input type="text" placeholder="19880503xxxx" name="nip"
-                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Spesialisasi</label>
-                    <select name="spesialisasi" class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium text-slate-500 appearance-none">
-                        <option value="">Pilih Spesialis</option>
-                        <option value="bedah">Bedah Saraf</option>
-                        <option value="jantung">Kardiologi</option>
-                        <option value="anak">Pediatrik</option>
-                        <option value="umum">Umum</option>
-                    </select>
-                </div>
-
-                <div class="flex flex-col gap-2 md:col-span-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Pendidikan Terakhir / Almamater</label>
-                    <input type="text" placeholder="Contoh: Universitas Indonesia" name="almamater"
-                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Resmi</label>
-                    <input type="email" placeholder="dokter@rsud-bp.com" name="email" 
-                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nomor STR</label>
-                    <input type="text" placeholder="STR-xxxx-xxxx" name="no_str"
-                        class="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium">
-                </div>
-
-                <div class="md:col-span-2 mt-6 flex gap-4">
-                    <button type="submit" class="flex-1 py-4 bg-blue-900 text-white rounded-[20px] font-bold shadow-xl shadow-blue-900/10 hover:bg-slate-800 transition active:scale-95">
-                        SIMPAN DATA DOKTER
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
     <script>
         lucide.createIcons();
@@ -361,12 +318,12 @@
             document.getElementById('card-nip').innerText = nip;
             document.getElementById('det-spec').innerText = spec;
             document.getElementById('det-img').src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=0f172a&color=fff&bold=true`;
-            
+
             document.getElementById('det-email').innerText = name.toLowerCase().split(' ')[1] + "@rsud-bp.com";
 
             listView.classList.add('hidden');
             detailView.classList.remove('hidden');
-            
+
             document.getElementById('main-content-area').scrollTop = 0;
         }
 
@@ -383,24 +340,14 @@
             backBtn.classList.remove('w-12', 'opacity-100', 'mr-4', 'p-3');
             searchContainer.classList.replace('w-[340px]', 'w-[400px]');
         }
-        function openAddDoctorModal() {
-            const modal = document.getElementById('addDoctorModal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-            lucide.createIcons();  
-        }
 
-function closeAddDoctorModal() {
-    const modal = document.getElementById('addDoctorModal');
-    modal.classList.add('hidden');
-    document.body.style.overflow = 'auto';  
-}
 
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeAddDoctorModal();
-});
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAddDoctorModal();
+        });
     </script>
 
-    
+
 </body>
+
 </html>
